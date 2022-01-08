@@ -9,12 +9,14 @@
  */
 
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import GameScreen from 'screens/game/GameScreen';
+import theme from 'theme';
 
 const App = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.palette.black.light }}>
+      <StatusBar animated={true} backgroundColor={theme.palette.black.medium} barStyle="light-content" />
       <GameScreen />
     </SafeAreaView>
   );

@@ -1,7 +1,8 @@
-import { Text } from 'react-native';
+import React from 'react';
+import WTextInputRow from 'components/TextInputRow/WTextInputRow';
 
 const GameScreen = () => {
-  return <Text>sadas</Text>;
+  return <WTextInputRow />;
 };
 
 export default GameScreen;
