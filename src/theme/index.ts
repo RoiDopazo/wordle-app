@@ -10,7 +10,9 @@ const palette = {
     dark: '#121213'
   },
   light: '#d7dadc',
-  white: '#ffffff'
+  white: '#ffffff',
+  green: '#5eba7d',
+  orange: '#f48225'
 };
 
 const theme = { palette };
