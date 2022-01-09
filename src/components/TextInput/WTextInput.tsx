@@ -4,6 +4,8 @@ import styles, { BOX_SIZE, BORDER_SIZE } from './WTextInput-styles';
 import { ANIMATION_DURATION } from 'utils/config';
 import { wait } from 'utils/helpers';
 import theme from 'theme';
+import { validationType } from 'types/GameTypes';
+import { ANIMATION_DELAY } from 'utils/config';
 
 interface IWTextInput {
   setRef?: (el: any) => void;
@@ -11,21 +13,18 @@ interface IWTextInput {
   char: string;
   onChangeChar: (textInput: string, index: number) => void;
   shouldValidate: boolean;
-  solution: string;
+  validation: validationType;
 }
 
-const WTextInput: React.FC<IWTextInput> = ({ setRef, index, char, onChangeChar, shouldValidate, solution }) => {
+const WTextInput: React.FC<IWTextInput> = ({ setRef, index, char, onChangeChar, shouldValidate, validation }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const textScaleAnimation = useRef(new Animated.Value(0)).current;
   const heighAnimation = useRef(new Animated.Value(0)).current;
 
-  const isCorrect = solution[index] === char;
-  const isCorrectButInWrongPos = !isCorrect && solution.includes(char);
-
   useEffect(() => {
     if (!shouldValidate) return;
 
-    wait(index * 100).then(() => {
+    wait(index * ANIMATION_DELAY).then(() => {
       Animated.timing(heighAnimation, {
         toValue: 1,
         duration: ANIMATION_DURATION,
@@ -87,7 +86,11 @@ const WTextInput: React.FC<IWTextInput> = ({ setRef, index, char, onChangeChar, 
       outputRange: [
         theme.palette.black.light,
         theme.palette.black.light,
-        isCorrect ? theme.palette.green : isCorrectButInWrongPos ? theme.palette.orange : theme.palette.black.dark
+        validation === 'correct'
+          ? theme.palette.green
+          : validation === 'wrong_pos'
+          ? theme.palette.orange
+          : theme.palette.black.dark
       ]
     })
   };

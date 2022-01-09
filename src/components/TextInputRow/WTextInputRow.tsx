@@ -3,20 +3,21 @@ import WTextInput from 'components/TextInput/WTextInput';
 import { TextInput, View } from 'react-native';
 import styles from './WTextInputRow-style';
 import { setCharAt } from 'utils/helpers';
-import { NUM_ITEMS_PER_ROW } from 'utils/config';
+import { NUM_CHARACTER_PER_WORD } from 'utils/config';
+import { validationType } from 'types/GameTypes';
 
 interface IWTextInputRow {
   index: number;
   attempt: number;
   word: string;
   onUpdateWord: (word: string) => void;
-  solution: string;
+  validations: validationType[];
 }
 
-const WTextInputRow: React.FC<IWTextInputRow> = ({ index, attempt, word, onUpdateWord, solution }) => {
+const WTextInputRow: React.FC<IWTextInputRow> = ({ index, attempt, word, onUpdateWord, validations }) => {
   const [shouldValidateInput, setShouldValidateInput] = useState<boolean>(false);
   const inputsRefs = useRef<TextInput[]>([]);
-  const row = Array.from({ length: NUM_ITEMS_PER_ROW });
+  const row = Array.from({ length: NUM_CHARACTER_PER_WORD });
 
   useEffect(() => {
     if (shouldValidateInput) return;
@@ -30,7 +31,7 @@ const WTextInputRow: React.FC<IWTextInputRow> = ({ index, attempt, word, onUpdat
     if (!textInput.match(isAvailableCharRegex)) return;
 
     const newWord = setCharAt(word, textIndex, textInput);
-    const isLastChar = textIndex >= NUM_ITEMS_PER_ROW - 1;
+    const isLastChar = textIndex >= NUM_CHARACTER_PER_WORD - 1;
     onUpdateWord(newWord.toUpperCase());
     inputsRefs.current[textIndex].blur();
     if (!isLastChar) {
@@ -47,7 +48,7 @@ const WTextInputRow: React.FC<IWTextInputRow> = ({ index, attempt, word, onUpdat
             key={currentIndex}
             index={currentIndex}
             char={word[currentIndex]}
-            solution={solution}
+            validation={validations[currentIndex]}
             onChangeChar={handleChangeChar}
             shouldValidate={shouldValidateInput}
           />

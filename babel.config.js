@@ -11,7 +11,8 @@ module.exports = {
           utils: './src/utils',
           screens: './src/screens',
           assets: './src/assets',
-          theme: './src/theme'
+          theme: './src/theme',
+          types: './src/types'
         }
       }
     ]
