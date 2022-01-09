@@ -7,7 +7,7 @@ import theme from 'theme';
 import { validationType } from 'types/GameTypes';
 import { ANIMATION_DELAY } from 'utils/config';
 
-interface IWTextInput {
+interface IWTextInputProps {
   setRef?: (el: any) => void;
   index: number;
   char: string;
@@ -16,7 +16,7 @@ interface IWTextInput {
   validation: validationType;
 }
 
-const WTextInput: React.FC<IWTextInput> = ({ setRef, index, char, onChangeChar, shouldValidate, validation }) => {
+const WTextInput: React.FC<IWTextInputProps> = ({ setRef, index, char, onChangeChar, shouldValidate, validation }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const textScaleAnimation = useRef(new Animated.Value(0)).current;
   const heighAnimation = useRef(new Animated.Value(0)).current;
@@ -108,6 +108,7 @@ const WTextInput: React.FC<IWTextInput> = ({ setRef, index, char, onChangeChar, 
           onBlur={() => setIsFocused(false)}
           onChangeText={handleChangeText}
           selectTextOnFocus
+          editable={!shouldValidate}
         />
       </Animated.View>
     </Animated.View>

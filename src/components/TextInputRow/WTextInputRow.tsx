@@ -6,7 +6,7 @@ import { setCharAt } from 'utils/helpers';
 import { NUM_CHARACTER_PER_WORD } from 'utils/config';
 import { validationType } from 'types/GameTypes';
 
-interface IWTextInputRow {
+interface IWTextInputRowProps {
   index: number;
   attempt: number;
   word: string;
@@ -14,7 +14,7 @@ interface IWTextInputRow {
   validations: validationType[];
 }
 
-const WTextInputRow: React.FC<IWTextInputRow> = ({ index, attempt, word, onUpdateWord, validations }) => {
+const WTextInputRow: React.FC<IWTextInputRowProps> = ({ index, attempt, word, onUpdateWord, validations }) => {
   const [shouldValidateInput, setShouldValidateInput] = useState<boolean>(false);
   const inputsRefs = useRef<TextInput[]>([]);
   const row = Array.from({ length: NUM_CHARACTER_PER_WORD });
