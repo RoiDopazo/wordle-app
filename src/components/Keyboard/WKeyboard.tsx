@@ -1,5 +1,6 @@
+import WTypography from 'components/Typography/WTypography';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { QWERTY_KEYBOARD } from 'utils/config';
 import styles from './WKeyboard-styles';
 
@@ -26,7 +27,9 @@ const WKeyboard: React.FC<WKeyboardProps> = ({ status }) => {
                     status.correctChars.has(char) && styles.charCorrect
                   ]}
                 >
-                  <Text style={[styles.charText, status.failChars.has(char) && styles.charTextLight]}>{char}</Text>
+                  <WTypography fontSize="p-sm" light={status.failChars.has(char)}>
+                    {char}
+                  </WTypography>
                 </View>
               );
             })}

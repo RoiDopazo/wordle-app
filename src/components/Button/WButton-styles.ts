@@ -18,11 +18,6 @@ const styles = StyleSheet.create({
   },
   buttonDisabled: {
     opacity: 0.35
-  },
-  text: {
-    fontSize: 16,
-    color: theme.palette.white,
-    fontWeight: '600'
   }
 });
 

@@ -1,5 +1,6 @@
+import WTypography from 'components/Typography/WTypography';
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import styles from './WButton-styles';
 
 type buttonVariantType = 'default' | 'success';
@@ -23,7 +24,9 @@ const WButton: React.FC<IWButtonProps> = ({ title, onPress, variant = 'default',
       style={[styles.button, buttonVariantStyleLookUp[variant], disabled && styles.buttonDisabled]}
       onPress={onPress}
     >
-      <Text style={styles.text}>{title}</Text>
+      <WTypography fontSize="p-lg" light>
+        {title}
+      </WTypography>
     </TouchableOpacity>
   );
 };

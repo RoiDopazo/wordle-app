@@ -12,12 +12,21 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 20,
     display: 'flex',
-    marginTop: 20
+    marginVertical: 20
   },
   outerContainer: {
     display: 'flex',
-    flex: 1,
-    justifyContent: 'space-between'
+    flex: 1
+  },
+  innerContainer: {
+    display: 'flex',
+    marginBottom: 20,
+    flex: 1
+  },
+  title: {
+    fontFamily: theme.fonts.Monoton,
+    color: theme.palette.light,
+    fontSize: 44
   }
 });
 

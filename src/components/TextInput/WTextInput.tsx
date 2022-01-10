@@ -116,8 +116,8 @@ const WTextInput: React.FC<IWTextInputProps> = ({
           <TextInput
             ref={setRef}
             style={styles.textInput}
-            value={char === '_' ? '' : char}
             maxLength={1}
+            value={char === '_' ? '' : char}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChangeText={handleChangeText}

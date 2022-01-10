@@ -17,10 +17,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: theme.palette.white,
+    textAlignVertical: 'center',
     textAlign: 'center',
     fontSize: 28,
-    zIndex: 1,
     fontWeight: 'bold',
+    zIndex: 1,
     transform: [{ scale: 1 }]
   },
   flipBackground: {
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
     zIndex: 20,
     width: BOX_SIZE - BORDER_SIZE * 2,
     backgroundColor: theme.palette.black.light
-    // backgroundColor: 'red'
   },
   isFocused: {
     backgroundColor: theme.palette.black.dark

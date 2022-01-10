@@ -15,6 +15,17 @@ const palette = {
   orange: '#f48225'
 };
 
-const theme = { palette };
+const fonts = {
+  Monoton: 'Monoton-Regular',
+  Prompt: 'Prompt-Regular',
+  'Prompt-ExtraBold': 'Prompt-ExtraBold',
+  'Prompt-Bold': 'Prompt-Bold',
+  'Prompt-SemiBold': 'Prompt-SemiBold',
+  'Prompt-Medium': 'Prompt-Medium',
+  'Prompt-Light': 'Prompt-Light',
+  'Prompt-ExtraLight': 'Prompt-ExtraLight'
+};
+
+const theme = { palette, fonts };
 
 export default theme;

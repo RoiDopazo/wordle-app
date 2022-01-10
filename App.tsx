@@ -15,7 +15,7 @@ import theme from 'theme';
 
 const App = () => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.palette.black.light }}>
+    <SafeAreaView style={{ display: 'flex', flex: 1, backgroundColor: theme.palette.black.light }}>
       <StatusBar animated={true} backgroundColor={theme.palette.black.medium} barStyle="light-content" />
       <GameScreen />
     </SafeAreaView>
