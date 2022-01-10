@@ -14,9 +14,18 @@ interface IWTextInputProps {
   onChangeChar: (textInput: string, index: number) => void;
   shouldValidate: boolean;
   validation: validationType;
+  onKeyPress: ({ key, textIndex }: { key: string; textIndex: number }) => void;
 }
 
-const WTextInput: React.FC<IWTextInputProps> = ({ setRef, index, char, onChangeChar, shouldValidate, validation }) => {
+const WTextInput: React.FC<IWTextInputProps> = ({
+  setRef,
+  index,
+  char,
+  onChangeChar,
+  shouldValidate,
+  validation,
+  onKeyPress
+}) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const textScaleAnimation = useRef(new Animated.Value(0)).current;
   const heighAnimation = useRef(new Animated.Value(0)).current;
@@ -57,6 +66,10 @@ const WTextInput: React.FC<IWTextInputProps> = ({ setRef, index, char, onChangeC
   const handleChangeText = (textInput: string) => {
     onChangeChar(textInput, index);
     animateTextScale();
+  };
+
+  const handleKeyPress = ({ nativeEvent: { key } }: { nativeEvent: { key: string } }) => {
+    onKeyPress({ key, textIndex: index });
   };
 
   const flipBackgroundStyle = {
@@ -108,6 +121,7 @@ const WTextInput: React.FC<IWTextInputProps> = ({ setRef, index, char, onChangeC
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChangeText={handleChangeText}
+            onKeyPress={handleKeyPress}
             selectTextOnFocus
             editable={!shouldValidate}
           />

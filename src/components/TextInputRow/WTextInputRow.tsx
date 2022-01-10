@@ -28,14 +28,31 @@ const WTextInputRow: React.FC<IWTextInputRowProps> = ({ index, attempt, word, on
 
   const handleChangeChar = (textInput: string, textIndex: number) => {
     const isAvailableCharRegex = '^[a-zA-Z]+$';
-    if (!textInput.match(isAvailableCharRegex)) return;
 
+    if (textInput === '') {
+      if (word[textIndex] === '_' && textIndex > 0) {
+        inputsRefs.current[textIndex - 1].focus();
+      }
+      const newWord = setCharAt(word, textIndex, '_');
+      onUpdateWord(newWord);
+    }
+
+    if (!textInput.match(isAvailableCharRegex)) return;
     const newWord = setCharAt(word, textIndex, textInput);
     const isLastChar = textIndex >= NUM_CHARACTER_PER_WORD - 1;
     onUpdateWord(newWord.toUpperCase());
-    inputsRefs.current[textIndex].blur();
     if (!isLastChar) {
       inputsRefs.current[textIndex + 1].focus();
+    } else {
+      inputsRefs.current[textIndex].blur();
+    }
+  };
+
+  const handleKeyPress = ({ key, textIndex }: { key: string; textIndex: number }) => {
+    if (key === 'Backspace' && word[textIndex] === '_') {
+      if (textIndex > 0) {
+        inputsRefs.current[textIndex - 1].focus();
+      }
     }
   };
 
@@ -51,6 +68,7 @@ const WTextInputRow: React.FC<IWTextInputRowProps> = ({ index, attempt, word, on
             validation={validations[currentIndex]}
             onChangeChar={handleChangeChar}
             shouldValidate={shouldValidateInput}
+            onKeyPress={handleKeyPress}
           />
         );
       })}
