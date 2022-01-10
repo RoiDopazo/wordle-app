@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, TextInput } from 'react-native';
+import { Animated, KeyboardAvoidingView, TextInput } from 'react-native';
 import styles, { BOX_SIZE, BORDER_SIZE } from './WTextInput-styles';
 import { ANIMATION_DURATION } from 'utils/config';
 import { wait } from 'utils/helpers';
@@ -96,22 +96,24 @@ const WTextInput: React.FC<IWTextInputProps> = ({ setRef, index, char, onChangeC
   };
 
   return (
-    <Animated.View style={containerStyle}>
-      <Animated.View style={flipBackgroundStyle} />
-      <Animated.View style={textScaleStyle}>
-        <TextInput
-          ref={setRef}
-          style={styles.textInput}
-          value={char === '_' ? '' : char}
-          maxLength={1}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onChangeText={handleChangeText}
-          selectTextOnFocus
-          editable={!shouldValidate}
-        />
+    <KeyboardAvoidingView behavior={'padding'}>
+      <Animated.View style={containerStyle}>
+        <Animated.View style={flipBackgroundStyle} />
+        <Animated.View style={textScaleStyle}>
+          <TextInput
+            ref={setRef}
+            style={styles.textInput}
+            value={char === '_' ? '' : char}
+            maxLength={1}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onChangeText={handleChangeText}
+            selectTextOnFocus
+            editable={!shouldValidate}
+          />
+        </Animated.View>
       </Animated.View>
-    </Animated.View>
+    </KeyboardAvoidingView>
   );
 };
 

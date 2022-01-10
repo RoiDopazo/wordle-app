@@ -34,3 +34,31 @@ export const computeValidation = (solution: string, currentWord: string): valida
   }
   return validations;
 };
+
+export const getKeyboardStatus = ({
+  attemptWords,
+  validations
+}: {
+  attemptWords: string[];
+  validations: validationType[][];
+}) => {
+  const correctChars = new Set<string>();
+  const wrongPosChars = new Set<string>();
+  const failChars = new Set<string>();
+
+  for (let i = 0; i < attemptWords.length; i++) {
+    const currentWord = attemptWords[i];
+
+    for (let j = 0; j < currentWord.length; j++) {
+      const currentChar = currentWord[j];
+
+      if (currentChar !== '_') {
+        if (validations[i][j] === 'correct') correctChars.add(currentChar);
+        if (validations[i][j] === 'wrong_pos') wrongPosChars.add(currentChar);
+        if (validations[i][j] === 'fail') failChars.add(currentChar);
+      }
+    }
+  }
+
+  return { correctChars, wrongPosChars, failChars };
+};
