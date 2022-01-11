@@ -28,6 +28,8 @@ const GameScreen = () => {
 
   const isVictory = attempt > 0 && validations[attempt - 1].every((val) => val === 'correct');
 
+  const currentWord = attemptWords[attempt];
+
   const handleUpdateWord = (newWord: string, index: number) => {
     setAttemptWords(
       produce(attemptWords, (draftState) => {
@@ -37,8 +39,6 @@ const GameScreen = () => {
   };
 
   const handleCheckWord = async () => {
-    const currentWord = attemptWords[attempt];
-
     const computedValidations = computeValidation(solution.current, currentWord);
     setValidations(
       produce(validations, (draftState) => {
@@ -87,14 +87,19 @@ const GameScreen = () => {
                     index={index}
                     attempt={attempt}
                     word={attemptWords[index]}
-                    onUpdateWord={(currentWord) => handleUpdateWord(currentWord, index)}
+                    onUpdateWord={(textInput) => handleUpdateWord(textInput, index)}
                     validations={validations[index]}
                   />
                 );
               })}
 
               <View style={styles.buttonContainer}>
-                <WButton title="Comprobar" onPress={handleCheckWord} variant="success" disabled={wasLastTry} />
+                <WButton
+                  title="Comprobar"
+                  onPress={handleCheckWord}
+                  variant="success"
+                  disabled={wasLastTry || currentWord.includes('_')}
+                />
               </View>
             </View>
           </View>
