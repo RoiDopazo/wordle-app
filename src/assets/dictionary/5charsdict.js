@@ -1172,7 +1172,7 @@ export const fiveCharsWords = [
 ];
 
 const getRandomWord_5 = () => {
-  return fiveCharsWords[Math.floor(Math.random() * fiveCharsWords.length)];
+  return fiveCharsWords[Math.floor(Math.random() * fiveCharsWords.length)].toUpperCase();
 };
 
 export default getRandomWord_5;

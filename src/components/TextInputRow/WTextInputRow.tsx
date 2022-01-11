@@ -20,7 +20,6 @@ const WTextInputRow: React.FC<IWTextInputRowProps> = ({ index, attempt, word, on
   const row = Array.from({ length: NUM_CHARACTER_PER_WORD });
 
   useEffect(() => {
-    if (shouldValidateInput) return;
     if (attempt > index) {
       setShouldValidateInput(true);
     }
